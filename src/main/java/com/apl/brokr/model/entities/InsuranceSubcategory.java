@@ -16,6 +16,7 @@ public class InsuranceSubcategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_subcategory")
     private Long id;
+    @Column(nullable = false)
     private String name;
     @ManyToOne()
     @JoinColumn(name="id_general_category")
