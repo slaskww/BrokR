@@ -18,7 +18,9 @@ public class InsuranceSubcategory {
     private Long id;
     @Column(nullable = false)
     private String name;
+    @Column(name = "is_obligatory", nullable = false)
+    private boolean isObligatory;
     @ManyToOne()
-    @JoinColumn(name="id_general_category")
+    @JoinColumn(name="id_general_category", nullable = false)
     private GeneralInsuranceCategory generalCat;
 }
