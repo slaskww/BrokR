@@ -8,6 +8,6 @@ import javax.persistence.Table;
 @Table(name = "broker")
 public class Broker extends User {
 
-    @Column(name = "licence_no")
+    @Column(name = "licence_no", nullable = false)
     private String licenceNumber;
 }

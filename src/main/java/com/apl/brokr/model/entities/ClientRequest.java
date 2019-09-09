@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,7 +22,7 @@ public class ClientRequest {
     @Column(name = "request_id")
     private Long id;
     @Column(name = "request_date")
-    private LocalDate requestDate;
+    private LocalDateTime requestDate;
     @OneToOne
     @JoinColumn(name = "id_client")
     private Client client;
@@ -32,4 +32,10 @@ public class ClientRequest {
     @ManyToOne
     @JoinColumn(name="general_insurance_id")
     private GeneralInsuranceCategory generalInsuranceCategory;
+
+    @PrePersist
+    public void prePersist() {
+        this.requestDate = LocalDateTime.now();
+    }
+
 }
