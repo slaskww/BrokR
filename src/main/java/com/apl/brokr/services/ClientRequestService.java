@@ -28,11 +28,19 @@ public class ClientRequestService {
     }
 
 
-    public Map<String, Set<String>> getCompleteMapOfInsuranceCategories() {
+//    public Map<String, Set<String>> getCompleteMapOfInsuranceCategories() {
+//        List<InsuranceSubcategory> insSubcats = insuranceSubcategoryService.findAll();
+//        return insSubcats
+//                .stream()
+//                .collect(Collectors.groupingBy(o -> o.getGeneralCat().getName(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory.getName(), Collectors.toSet())));
+//
+//    }
+
+    public Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> getCompleteMapOfInsuranceCategories() {
         List<InsuranceSubcategory> insSubcats = insuranceSubcategoryService.findAll();
         return insSubcats
                 .stream()
-                .collect(Collectors.groupingBy(o -> o.getGeneralCat().getName(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory.getName(), Collectors.toSet())));
+                .collect(Collectors.groupingBy(o -> o.getGeneralCat(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory, Collectors.toSet())));
 
     }
 }

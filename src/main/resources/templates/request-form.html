@@ -9,34 +9,38 @@
 <p>In request-form</p>
 
 <table>
-    <tr>
+<!--    <tr>
         <td>Wybierz kategorię ubezpieczenia:</td>
         <td>
             <select>
-                <option value=""> -- </option>
-                <option th:each="entry : ${map.entrySet()}"
-                        th:value="${entry.key}"
-                        th:utext="${entry.key}"/>
+                <option value=""> &#45;&#45;</option>
+                <option th:each="entry : ${mapa.values()}"
+                        th:value="${entry}"
+                        th:utext="${entry}"/>
             </select>
         </td>
     </tr>
 
     <tr>
-        <td><input name="submit" type="submit" value="submit" /></td>
-    </tr>
+        <td><input name="submit" type="submit" value="submit"/></td>
+    </tr>-->
 
     <form th:action="@{/client/request/add}" method="post" th:object="${data}">
-   <!--     <input type="hidden" th:field="*{id}"/>
-        <div>
-            <label for="project_name"> Project Name:</label>
-            <input type="text" id="project_name" th:field="*{name}"/>
-        </div>-->
+        <!--     <input type="hidden" th:field="*{id}"/>
+             <div>
+                 <label for="project_name"> Project Name:</label>
+                 <input type="text" id="project_name" th:field="*{name}"/>
+             </div>-->
         <div>
             <label>Kategorie szczegółowe:</label>
             <ul>
-                <li th:each="role : ${map.values().toArray()}">
-<!--                    <input type="checkbox" th:text="${role}" th:value="${{role}}" th:field="*{subcategories}" />-->
-                    <p th:text="${role}"></p><br>
+                <li th:each="element : ${mapa}">
+                    <p th:text="${element.key.getName()}"></p><br />
+                    <table>
+                        <tr th:each="elem : ${element.value}">
+                            <input type="checkbox" th:text="${elem.getName()}" th:value="${{elem}}" th:field="*{subcategories}" /><br />
+                        </tr>
+                    </table>
                 </li>
             </ul>
         </div>

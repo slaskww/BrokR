@@ -1,6 +1,8 @@
 package com.apl.brokr.web.controllers;
 
 import com.apl.brokr.dto.RequestDataDto;
+import com.apl.brokr.model.entities.GeneralInsuranceCategory;
+import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.services.ClientRequestService;
 import com.apl.brokr.services.GeneralInsuranceCatService;
 import com.apl.brokr.services.InsuranceSubcategoryService;
@@ -32,11 +34,11 @@ public class ClientController {
     @GetMapping("/request/add")
     public String displayRequestForm(Model model){
 
-       Map<String, Set<String>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
+       Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
        map.entrySet().forEach(stringSetEntry -> System.out.println(stringSetEntry.getKey() + stringSetEntry.getValue().toString()));
 
         model.addAttribute("data", new RequestDataDto());
-        model.addAttribute("map", map);
+        model.addAttribute("mapa", map);
         return "request-form";
     }
 
