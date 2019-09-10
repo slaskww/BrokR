@@ -1,5 +1,6 @@
 package com.apl.brokr.model.entities;
 
+import com.apl.brokr.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -43,7 +44,8 @@ public abstract class User {
     private String email;
     @Column(nullable = false)
     private String phoneNumber;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "created_on")
     private LocalDateTime createdOn;
