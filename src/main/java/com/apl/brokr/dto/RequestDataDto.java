@@ -16,6 +16,6 @@ import java.util.Collection;
 public class RequestDataDto {
 
     private Client client;
-    private Collection<InsuranceSubcategory> subcategories = new ArrayList<>();
+    private Collection<String> subcategories = new ArrayList<>();
     private GeneralInsuranceCategory generalInsuranceCategory;
 }
