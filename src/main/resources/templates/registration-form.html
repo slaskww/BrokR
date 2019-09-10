@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz rejestracyjny</title>
+</head>
+<body>
+
+<div class="container">
+    <div style="margin-top: 50px">Rejestracja</div>
+    <div>
+        <form method="post" th:action = "@{/register}" th:object="${data}" >
+            <div>
+                <input type="number" th:field="*{id}" hidden="true">
+            </div>
+            <div>
+                <input type="text" th:field="*{role}" value="broker" hidden="true">
+            </div>
+            <div>
+                <input type="text" th:field="*{licenceNumber}"  hidden="true">
+            </div>
+            <div>
+                <label>Nazwa przedsiębiorstwa</label>
+                <input type="text" th:field="*{companyName}" placeholder="nazwa przedsiębiorstwa">
+                <p th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Imię</label>
+                <input type="text" th:field="*{firstName}" placeholder="imię" th:class="${#fields.hasErrors('firstName')}? fieldError">
+            </div>
+            <div>
+                <label>Nazwisko</label>
+                <input type="text" th:field="*{lastName}" placeholder="nazwisko">
+            </div>
+            <div>
+                <label>Numer telefonu</label>
+                <input type="text" th:field="*{phoneNumber}" placeholder="telefon">
+                <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Ulica</label>
+                <input type="text" th:field="*{street}" placeholder="ulica">
+                <p th:if="${#fields.hasErrors('street')}" th:errors="*{street}" >Błąd: </p>
+
+            </div>
+            <div>
+                <label>Kod pocztowy</label>
+                <input type="text" th:field="*{postalCode}" placeholder="kod pocztowy">
+                <p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Miasto</label>
+                <input type="text" th:field="*{city}" placeholder="miasto">
+                <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Powiat</label>
+                <input type="text" th:field="*{district}" placeholder="powiat">
+            </div>
+            <div>
+                <label>Gmina</label>
+                <input type="text" th:field="*{commune}" placeholder="gmina">
+            </div>
+            <div>
+                <label>Województwo</label>
+                <input type="text" th:field="*{province}" placeholder="województwo">
+            </div>
+            <div>
+                <label>Państwo</label>
+                <input type="text" th:field="*{country}"  placeholder="państwo">
+            </div>
+            <div>
+                <label>Numer KRS</label>
+                <input type="text" th:field="*{krsNumber}" placeholder="KRS">
+                <p th:if="${#fields.hasErrors('krsNumber')}" th:errors="*{krsNumber}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Numer REGON</label>
+                <input type="text" th:field="*{regonNumber}" placeholder="Regon">
+                <p th:if="${#fields.hasErrors('regonNumber')}" th:errors="*{regonNumber}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Numer NIP</label>
+                <input type="text" th:field="*{nipNumber}" placeholder="NIP">
+                <p th:if="${#fields.hasErrors('nipNumber')}" th:errors="*{nipNumber}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Numer PKD</label>
+                <input type="text" th:field="*{pkdNumber}" placeholder="PKD">
+                <p th:if="${#fields.hasErrors('pkdNumber')}" th:errors="*{pkdNumber}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Nazwa użytkownika</label>
+                <input type="text" th:field="*{username}" placeholder="nazwa użytkownika">
+                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Adres email</label>
+                <input type="email" th:field="*{email}" placeholder="email">
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Hasło</label>
+                <input type="password" th:field="*{password}" placeholder="hasło">
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >Błąd: </p>
+            </div>
+            <div>
+                <label>Powtórz hasło</label>
+                <input type="password" th:field="*{confirmedPassword}" placeholder="powtórz hasło">
+                <p th:if="${#fields.hasErrors('confirmedPassword')}" th:errors="*{confirmedPassword}" >Błąd: </p>
+            </div>
+            <input type="submit" value="Zarejestruj">
+            <input type="reset" value="Wyczyść dane">
+        </form>
+    </div>
+</div>
+
+
+</body>
+
+</html>
