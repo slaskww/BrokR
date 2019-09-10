@@ -1,5 +1,6 @@
 package com.apl.brokr.model.entities;
 
+import com.apl.brokr.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,29 +19,33 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "company_name")
+    @Column(name = "company_name", nullable = false)
     private String companyName;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "krs_number")
+    @Column(name = "krs_number", nullable = false)
     private String krsNumber;
-    @Column(name = "nip_number")
+    @Column(name = "nip_number", nullable = false)
     private String nipNumber;
-    @Column(name = "regon_number")
+    @Column(name = "regon_number", nullable = false)
     private String regonNumber;
-    @Column(name = "pkd_number")
+    @Column(name = "pkd_number", nullable = false)
     private String pkdNumber;
 
     @Embedded
     private Address address;
-
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String phoneNumber;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "created_on")
     private LocalDateTime createdOn;

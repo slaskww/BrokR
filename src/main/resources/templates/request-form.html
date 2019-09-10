@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>In request-form</p>
+
+<table>
+    <tr>
+        <td>Wybierz kategorię ubezpieczenia:</td>
+        <td>
+            <select>
+                <option value=""> -- </option>
+                <option th:each="entry : ${map.entrySet()}"
+                        th:value="${entry.key}"
+                        th:utext="${entry.key}"/>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td><input name="submit" type="submit" value="submit" /></td>
+    </tr>
+
+    <form th:action="@{/client/request/add}" method="post" th:object="${data}">
+   <!--     <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="project_name"> Project Name:</label>
+            <input type="text" id="project_name" th:field="*{name}"/>
+        </div>-->
+        <div>
+            <label>Kategorie szczegółowe:</label>
+            <ul>
+                <li th:each="role : ${map.values().toArray()}">
+<!--                    <input type="checkbox" th:text="${role}" th:value="${{role}}" th:field="*{subcategories}" />-->
+                    <p th:text="${role}"></p><br>
+                </li>
+            </ul>
+        </div>
+        <div class="actions">
+            <button type="submit" value="Save" class="button">Save</button>
+        </div>
+    </form>
+
+</table>
+
+</body>
+</html>

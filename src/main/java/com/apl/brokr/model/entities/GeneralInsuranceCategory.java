@@ -17,6 +17,7 @@ public class GeneralInsuranceCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
     private long id;
+    @Column(nullable = false)
     private String name;
 
 }
