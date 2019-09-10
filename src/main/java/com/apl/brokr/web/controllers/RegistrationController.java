@@ -42,7 +42,7 @@ public class RegistrationController {
             return "registration-form";
         }
 
-        dataDto.setRole("broker");
+        dataDto.setRole("client");
         service.save(dataDto);
 
        // return "redirect:/login";
