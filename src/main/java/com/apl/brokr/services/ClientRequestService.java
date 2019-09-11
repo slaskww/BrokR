@@ -1,5 +1,8 @@
 package com.apl.brokr.services;
 
+import com.apl.brokr.dto.RequestDataDto;
+import com.apl.brokr.dto.mappers.ClientRequestMapper;
+import com.apl.brokr.model.entities.ClientRequest;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.model.repositories.ClientRequestRepository;
@@ -42,5 +45,10 @@ public class ClientRequestService {
                 .stream()
                 .collect(Collectors.groupingBy(o -> o.getGeneralCat(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory, Collectors.toSet())));
 
+    }
+
+    public void save(RequestDataDto requestDataDto){
+        ClientRequest clientRequest = ClientRequestMapper.toEntity(requestDataDto);
+        clientRequestRepository.save(clientRequest);
     }
 }

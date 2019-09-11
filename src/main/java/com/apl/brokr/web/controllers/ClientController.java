@@ -4,15 +4,18 @@ import com.apl.brokr.dto.RequestDataDto;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.services.ClientRequestService;
+import com.apl.brokr.services.ClientService;
 import com.apl.brokr.services.GeneralInsuranceCatService;
 import com.apl.brokr.services.InsuranceSubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,20 +26,18 @@ import java.util.Set;
 public class ClientController {
 
     private ClientRequestService clientRequestService;
+    private ClientService clientService;
 
 
-    @Autowired
-    public ClientController(ClientRequestService clientRequestService) {
+    public ClientController(ClientRequestService clientRequestService, ClientService clientService) {
         this.clientRequestService = clientRequestService;
-
+        this.clientService = clientService;
     }
 
     @GetMapping("/request/add")
     public String displayRequestForm(Model model){
 
        Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
-       map.entrySet().forEach(stringSetEntry -> System.out.println(stringSetEntry.getKey() + stringSetEntry.getValue().toString()));
-
         model.addAttribute("data", new RequestDataDto());
         model.addAttribute("mapa", map);
         return "request-form";
@@ -44,8 +45,13 @@ public class ClientController {
 
 
     @PostMapping("/request/add")
-    public String proceedRequestForm(){
+    public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal){
 
+        RequestDataDto filledDto = dataDto;
+        filledDto.setClient(clientService.findByUsername(principal.getName()));
+        clientRequestService.save(dataDto);
+
+        System.out.println(dataDto.toString());
 
         return "main-menu";
     }

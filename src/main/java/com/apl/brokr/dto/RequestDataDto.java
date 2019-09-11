@@ -9,6 +9,7 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +17,8 @@ import java.util.Collection;
 public class RequestDataDto {
 
     private Client client;
-    private Collection<String> subcategories = new ArrayList<>();
+    private List<InsuranceSubcategory> subcategories = new ArrayList<>();
     private GeneralInsuranceCategory generalInsuranceCategory;
+
+
 }

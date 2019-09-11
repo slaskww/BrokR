@@ -32,7 +32,7 @@
                  <input type="text" id="project_name" th:field="*{name}"/>
              </div>-->
         <div>
-            <label>Kategorie szczegółowe:</label>
+            <label>Rodzaje ubezpieczeń:</label>
             <ul>
                 <li th:each="element : ${mapa}">
                     <p th:text="${element.key.getName()}"></p><br />
