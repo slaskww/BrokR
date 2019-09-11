@@ -10,10 +10,7 @@ import com.apl.brokr.services.InsuranceSubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -57,8 +54,19 @@ public class ClientController {
     }
 
     @GetMapping("/request/all")
-    public String displayRequestList(Model model){
+    public String displayRequestList(Model model, Principal principal){
 
+        List<RequestDataDto> requests = clientRequestService.getAllByUsername(principal.getName());
+        model.addAttribute("requests", requests);
         return "request-list";
+    }
+
+    @GetMapping("/request/{id}")
+    public String displayChosenRequest(@PathVariable Long id, Model model){
+
+        RequestDataDto data = clientRequestService.getOneById(id);
+        model.addAttribute("request", data);
+
+        return "request-single";
     }
 }

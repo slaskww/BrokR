@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lista Twoich wniosków</title>
 </head>
 <body>
+
+<table border="2">
+    <thead>
+    <tr>Lista wniosków</tr>
+    <tr>
+        <th>Id</th>
+        <th>Data</th>
+        <th>klient</th>
+        <th>Kategoria</th>
+        <th>Status</th>
+        <th>zasób</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="elem : ${requests}">
+        <td th:text="${elem.getId()}"></td>
+        <td th:text="${elem.getDate()}"></td>
+        <td th:text="${elem.getClient().getCompanyName()}"></td>
+        <td th:text="${elem.getGeneralInsuranceCategory().getName()}"></td>
+        <td></td>
+        <td><a th:href="@{'/client/request/' + ${elem.getId()}}">otwórz</a></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
