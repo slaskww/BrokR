@@ -20,4 +20,8 @@ public class ClientService {
     public void save(Client client){
         clientRepository.save(client);
     }
+
+    public Client findByUsername(String username){
+       return clientRepository.findByUsername(username);
+    }
 }

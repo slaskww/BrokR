@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "request")
@@ -28,7 +29,7 @@ public class ClientRequest {
     private Client client;
     @OneToMany
     @JoinTable(name = "request_subcategory" , joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "subcategory_id"))
-    private Collection<InsuranceSubcategory> subcategories = new ArrayList<>();
+    private List<InsuranceSubcategory> subcategories = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name="general_insurance_id")
     private GeneralInsuranceCategory generalInsuranceCategory;

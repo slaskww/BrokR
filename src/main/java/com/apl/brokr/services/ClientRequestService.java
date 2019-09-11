@@ -1,5 +1,8 @@
 package com.apl.brokr.services;
 
+import com.apl.brokr.dto.RequestDataDto;
+import com.apl.brokr.dto.mappers.ClientRequestMapper;
+import com.apl.brokr.model.entities.ClientRequest;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.model.repositories.ClientRequestRepository;
@@ -28,11 +31,24 @@ public class ClientRequestService {
     }
 
 
-    public Map<String, Set<String>> getCompleteMapOfInsuranceCategories() {
+//    public Map<String, Set<String>> getCompleteMapOfInsuranceCategories() {
+//        List<InsuranceSubcategory> insSubcats = insuranceSubcategoryService.findAll();
+//        return insSubcats
+//                .stream()
+//                .collect(Collectors.groupingBy(o -> o.getGeneralCat().getName(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory.getName(), Collectors.toSet())));
+//
+//    }
+
+    public Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> getCompleteMapOfInsuranceCategories() {
         List<InsuranceSubcategory> insSubcats = insuranceSubcategoryService.findAll();
         return insSubcats
                 .stream()
-                .collect(Collectors.groupingBy(o -> o.getGeneralCat().getName(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory.getName(), Collectors.toSet())));
+                .collect(Collectors.groupingBy(o -> o.getGeneralCat(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory, Collectors.toSet())));
 
+    }
+
+    public void save(RequestDataDto requestDataDto){
+        ClientRequest clientRequest = ClientRequestMapper.toEntity(requestDataDto);
+        clientRequestRepository.save(clientRequest);
     }
 }
