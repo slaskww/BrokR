@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface BrokerRepository extends JpaRepository<Broker, Long> {
 
-    Client findByUsername(String username);
-    List<Client> findAllByUsername(String username);
+    Broker findByUsername(String username);
 }
