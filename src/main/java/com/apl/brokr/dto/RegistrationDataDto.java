@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -39,7 +40,7 @@ public class RegistrationDataDto {
     private String country;
 
     @NotBlank(message = "Pole nie może być puste")
-    @Size(min = 7, max = 20, message = "Nazwa użytkownika powinna zawierać od 7 do 20 znaków")
+    @Size(min = 4, max = 20, message = "Nazwa użytkownika powinna zawierać od 7 do 20 znaków")
     private String username;
     @NotBlank(message = "Pole nie może być puste")
     @Size(min = 8, max = 12, message = "Hasło powinno zawierać od 8 do 15 znaków")
