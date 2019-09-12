@@ -1,5 +1,9 @@
 package com.apl.brokr.services;
 
+import com.apl.brokr.dto.RequestDataDto;
+import com.apl.brokr.dto.mappers.ClientRequestMapper;
+import com.apl.brokr.model.entities.Client;
+import com.apl.brokr.model.entities.ClientRequest;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.model.repositories.ClientRequestRepository;
@@ -19,20 +23,39 @@ public class ClientRequestService {
     private ClientRequestRepository clientRequestRepository;
     private GeneralInsuranceCatService generalInsuranceCatService;
     private InsuranceSubcategoryService insuranceSubcategoryService;
+    private ClientService clientService;
 
     @Autowired
-    public ClientRequestService(ClientRequestRepository clientRR, GeneralInsuranceCatService generalICS, InsuranceSubcategoryService insuranceSS) {
-        this.clientRequestRepository = clientRR;
-        this.generalInsuranceCatService = generalICS;
-        this.insuranceSubcategoryService = insuranceSS;
+    public ClientRequestService(ClientRequestRepository clientRequestRepository, GeneralInsuranceCatService generalInsuranceCatService, InsuranceSubcategoryService insuranceSubcategoryService, ClientService clientService) {
+        this.clientRequestRepository = clientRequestRepository;
+        this.generalInsuranceCatService = generalInsuranceCatService;
+        this.insuranceSubcategoryService = insuranceSubcategoryService;
+        this.clientService = clientService;
     }
 
 
-    public Map<String, Set<String>> getCompleteMapOfInsuranceCategories() {
+    public Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> getCompleteMapOfInsuranceCategories() {
         List<InsuranceSubcategory> insSubcats = insuranceSubcategoryService.findAll();
         return insSubcats
                 .stream()
-                .collect(Collectors.groupingBy(o -> o.getGeneralCat().getName(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory.getName(), Collectors.toSet())));
+                .collect(Collectors.groupingBy(o -> o.getGeneralCat(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory, Collectors.toSet())));
 
+    }
+
+    public void save(RequestDataDto requestDataDto){
+        ClientRequest clientRequest = ClientRequestMapper.toEntity(requestDataDto);
+        clientRequestRepository.save(clientRequest);
+    }
+
+
+    public List<RequestDataDto> getAllByUsername(String username){
+        List<ClientRequest> requests =  clientRequestRepository.findAllByClient_Username(username);
+      return ClientRequestMapper.toDtoList(requests);
+    }
+
+
+    public RequestDataDto getOneById(Long id){
+       ClientRequest request = clientRequestRepository.findById(id).get();
+       return ClientRequestMapper.toDto(request);
     }
 }

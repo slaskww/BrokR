@@ -10,6 +10,8 @@ public class ClientMapper {
     public static Client toEntity(RegistrationDataDto data){
         Client client = new Client();
 
+
+        client.setId(data.getId());
         client.setCompanyName(data.getCompanyName());
         client.setFirstName(data.getFirstName());
         client.setLastName(data.getLastName());
@@ -42,6 +44,7 @@ public class ClientMapper {
     public static RegistrationDataDto toDto(Client client){
         RegistrationDataDto data = new RegistrationDataDto();
 
+        data.setId(client.getId());
         data.setCompanyName(client.getCompanyName());
         data.setFirstName(client.getFirstName());
         data.setLastName(client.getLastName());

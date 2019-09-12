@@ -22,4 +22,8 @@ public class BrokerService {
         broker.setLicenceNumber("licence-no-19834");
         brokerRepository.save(broker);
     }
+
+    public Broker findByUsername(String username){
+      return brokerRepository.findByUsername(username);
+    }
 }

@@ -10,6 +10,8 @@ public class BrokerMapper {
     public static Broker toEntity(RegistrationDataDto data){
         Broker broker = new Broker();
 
+
+        broker.setId(data.getId());
         broker.setCompanyName(data.getCompanyName());
         broker.setFirstName(data.getFirstName());
         broker.setLastName(data.getLastName());
@@ -42,6 +44,7 @@ public class BrokerMapper {
     public static RegistrationDataDto toDto(Broker broker){
         RegistrationDataDto data = new RegistrationDataDto();
 
+        data.setId(broker.getId());
         data.setCompanyName(broker.getCompanyName());
         data.setFirstName(broker.getFirstName());
         data.setLastName(broker.getLastName());

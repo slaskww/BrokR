@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wniosek</title>
+</head>
+<body>
+
+<table border="2">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Data</th>
+        <th>Kategoria</th>
+        <th>Subkategorie</th>
+        <th>Informacje dodatkowe</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${request.getId()}">
+        <td th:text="${request.getDate()}">
+        <td th:text="${request.getGeneralInsuranceCategory().getName()}">
+        <td>
+            <ul th:each="elem : ${request.getSubcategories()}">
+                <li th:text="${elem.getName()}">
+                </li>
+            </ul>
+        </td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
