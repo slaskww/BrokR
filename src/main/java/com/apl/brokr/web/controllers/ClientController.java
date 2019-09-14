@@ -45,7 +45,9 @@ public class ClientController {
     public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal){
 
         RequestDataDto filledDto = dataDto;
+        System.out.println("Principal: " +  principal.getName());
         filledDto.setClient(clientService.findByUsername(principal.getName()));
+        System.out.println(filledDto.toString());
         clientRequestService.save(dataDto);
 
         System.out.println(dataDto.toString());

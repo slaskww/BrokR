@@ -27,7 +27,7 @@ public class ClientRequest {
     @OneToOne
     @JoinColumn(name = "id_client")
     private Client client;
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "request_subcategory" , joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "subcategory_id"))
     private List<InsuranceSubcategory> subcategories = new ArrayList<>();
     @ManyToOne
