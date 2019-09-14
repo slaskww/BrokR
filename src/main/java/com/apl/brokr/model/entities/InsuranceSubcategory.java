@@ -20,7 +20,7 @@ public class InsuranceSubcategory {
     private String name;
     @Column(name = "is_obligatory", nullable = false)
     private boolean isObligatory;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name="id_general_category", nullable = false)
     private GeneralInsuranceCategory generalCat;
 }

@@ -24,7 +24,7 @@ public class ClientRequest {
     private Long id;
     @Column(name = "request_date")
     private LocalDateTime requestDate;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_client")
     private Client client;
     @ManyToMany
