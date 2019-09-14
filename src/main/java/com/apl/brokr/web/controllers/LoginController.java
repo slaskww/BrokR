@@ -1,4 +1,4 @@
-package com.apl.brokr.controller;
+package com.apl.brokr.web.controllers;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
