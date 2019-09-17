@@ -8,28 +8,29 @@
     <title>Title</title>
 </head>
 <body>
-<p>Panel uzytkownika</p>
+<p>
+    Panel uzytkownika <span th:text="${#authentication.getName()}"></span>
+</p>
 
 <div>
-    <a th:href="@{/edit}">Edytuj dane osobowe</a><br />
+    <a th:href="@{/edit}">Edytuj dane osobowe</a><br/>
 </div>
 
-<div sec:authorize="hasRole('BROKER')">
-    <a th:href="@{/broker/request/add}">dodaj formularz zapytania</a><br />
-    <a th:href="@{/broker/request/all}">przeglądaj aktywne formularze</a><br />
-    <a th:href="@{/broker/poa/add}">dodaj pełnomocnictwo</a><br />
-    <a th:href="@{/broker/poa/all}">przeglądaj pełnomocnictwa</a><br />
-    <a th:href="@{/broker/slip/add}">dodaj slip brokerski</a><br />
-    <a th:href="@{/broker/slip/all}">przeglądaj slipy brokerskie</a><br />
-    <a th:href="@{/broker/clients/add}">dodaj nowego klienta</a><br />
-    <a th:href="@{/broker/clients/all}">twoi klienci</a><br />
-
+<div sec:authorize="hasAnyRole('ROLE_BROKER', 'ROLE_ADMIN')">
+    <a th:href="@{/broker/request/add}">dodaj formularz zapytania</a><br/>
+    <a th:href="@{/broker/request/all}">przeglądaj aktywne formularze</a><br/>
+    <a th:href="@{/broker/poa/add}">dodaj pełnomocnictwo</a><br/>
+    <a th:href="@{/broker/poa/all}">przeglądaj pełnomocnictwa</a><br/>
+    <a th:href="@{/broker/slip/add}">dodaj slip brokerski</a><br/>
+    <a th:href="@{/broker/slip/all}">przeglądaj slipy brokerskie</a><br/>
+    <a th:href="@{/broker/clients/add}">dodaj nowego klienta</a><br/>
+    <a th:href="@{/broker/clients/all}">twoi klienci</a><br/>
 </div>
-<div sec:authorize="hasRole('CLIENT')">
-    <a th:href="@{/client/request/add}">dodaj formularz zapytania</a><br />
-    <a th:href="@{/client/request/all}">przeglądaj twoje formularze</a><br />
-    <a th:href="@{/client/poa/add}">dodaj pełnomocnictwo</a><br />
-    <a th:href="@{/client/poa/all}">przeglądaj swoje pełnomocnictwa</a><br />
+<div sec:authorize="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
+    <a th:href="@{/client/request/add}">dodaj formularz zapytania</a><br/>
+    <a th:href="@{/client/request/all}">przeglądaj twoje formularze</a><br/>
+    <a th:href="@{/client/poa/add}">dodaj pełnomocnictwo</a><br/>
+    <a th:href="@{/client/poa/all}">przeglądaj swoje pełnomocnictwa</a><br/>
 </div>
 
 </body>

@@ -18,12 +18,12 @@ public class BrokerService {
     }
 
 
-    public void save(Broker broker){
+    public void save(Broker broker) {
         broker.setLicenceNumber("licence-no-19834");
         brokerRepository.save(broker);
     }
 
-    public Broker findByUsername(String username){
-      return brokerRepository.findByUsername(username);
+    public Broker findByUsername(String username) {
+        return brokerRepository.findByUsername(username);
     }
 }

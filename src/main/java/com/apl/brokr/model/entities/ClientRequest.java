@@ -7,7 +7,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -26,12 +25,12 @@ public class ClientRequest {
     private LocalDateTime requestDate;
     @ManyToOne
     @JoinColumn(name = "id_client")
-    private Client client;
+    private User client;
     @ManyToMany
-    @JoinTable(name = "request_subcategory" , joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "subcategory_id"))
+    @JoinTable(name = "request_subcategory", joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "subcategory_id"))
     private List<InsuranceSubcategory> subcategories = new ArrayList<>();
     @ManyToOne
-    @JoinColumn(name="general_insurance_id")
+    @JoinColumn(name = "general_insurance_id")
     private GeneralInsuranceCategory generalInsuranceCategory;
 
     @PrePersist

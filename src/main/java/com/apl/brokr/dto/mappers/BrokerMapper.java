@@ -7,7 +7,7 @@ import com.apl.brokr.model.entities.Broker;
 
 public class BrokerMapper {
 
-    public static Broker toEntity(RegistrationDataDto data){
+    public static Broker toEntity(RegistrationDataDto data) {
         Broker broker = new Broker();
 
 
@@ -41,7 +41,7 @@ public class BrokerMapper {
 
     }
 
-    public static RegistrationDataDto toDto(Broker broker){
+    public static RegistrationDataDto toDto(Broker broker) {
         RegistrationDataDto data = new RegistrationDataDto();
 
         data.setId(broker.getId());

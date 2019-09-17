@@ -47,24 +47,23 @@ public class RegistrationController {
         }
 
 
-        if (dataDto.getId() == null){
-            dataDto.setRole("client");
+        if (dataDto.getId() == null) {
+         //   dataDto.setRole("client");
             service.save(dataDto);
         } else {
             service.update(dataDto);
         }
-       // return "redirect:/login";
+        // return "redirect:/login";
         return "main-menu";
     }
 
     @GetMapping("/edit")
-    public String editUserData(Model model, Principal principal){
+    public String editUserData(Model model, Principal principal) {
         RegistrationDataDto dataDto = service.getRegistrationDataDto(principal.getName());
-
-//        List<String> authorities = userDetails.getAuthorities().stream().map(o -> o.getAuthority()).collect(Collectors.toList());
-//        dataDto = service.getRegistrationDataDto(userDetails.getUsername(), authorities);
-
         model.addAttribute("data", dataDto);
+
         return "registration-form";
     }
 }
+//        List<String> authorities = userDetails.getAuthorities().stream().map(o -> o.getAuthority()).collect(Collectors.toList());
+//        dataDto = service.getRegistrationDataDto(userDetails.getUsername(), authorities);

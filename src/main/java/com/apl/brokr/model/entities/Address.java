@@ -1,8 +1,6 @@
 package com.apl.brokr.model.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,6 +9,8 @@ import javax.persistence.Embeddable;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     @Column(nullable = false)

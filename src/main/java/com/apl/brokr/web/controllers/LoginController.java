@@ -13,28 +13,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class LoginController
-{
+public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,
                             Model model) {
         String errorMessge = null;
-        if(error != null) {
+        if (error != null) {
             errorMessge = "Nazwa użytkownika i hasło są niepoprawne !!";
         }
-        if(logout != null) {
+        if (logout != null) {
             errorMessge = "Zostałeś poprawnie wylogowany !!";
         }
         model.addAttribute("errorMessge", errorMessge);
         return "login";   // CTRL + lewy myszy powinno przenosic na strone login.html- nie przenosi
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler ().logout(request, response, auth);
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout=true";
     }

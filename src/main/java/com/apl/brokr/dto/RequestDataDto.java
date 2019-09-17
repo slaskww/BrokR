@@ -1,6 +1,6 @@
 package com.apl.brokr.dto;
 
-import com.apl.brokr.model.entities.Client;
+import com.apl.brokr.model.entities.User;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.util.List;
 public class RequestDataDto {
 
     private Long id;
-    private Client client;
+    private User client;
     private List<InsuranceSubcategory> subcategories = new ArrayList<>();
     private GeneralInsuranceCategory generalInsuranceCategory;
     private LocalDate date;

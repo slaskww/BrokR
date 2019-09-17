@@ -1,46 +1,34 @@
 package com.apl.brokr.services;
 
 import com.apl.brokr.dto.RegistrationDataDto;
-import com.apl.brokr.dto.mappers.BrokerMapper;
-import com.apl.brokr.dto.mappers.ClientMapper;
-import com.apl.brokr.model.Role;
-import com.apl.brokr.model.entities.Broker;
-import com.apl.brokr.model.entities.Client;
+import com.apl.brokr.dto.mappers.UserMapper;
+import com.apl.brokr.model.entities.User;
+import com.apl.brokr.model.entities.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class RegistrationService {
 
-    private BrokerService brokerService;
-    private ClientService clientService;
+    private UserService userService;
 
     @Autowired
-    public RegistrationService(BrokerService brokerService, ClientService clientService) {
-        this.brokerService = brokerService;
-        this.clientService = clientService;
+    public RegistrationService(UserService userService) {
+        this.userService = userService;
     }
 
 
     public void save(RegistrationDataDto data) {
-
-        if (data.getRole().equals("broker")) {
-            Broker broker = BrokerMapper.toEntity(data);
-            brokerService.save(broker);
-        } else {
-            Client client = ClientMapper.toEntity(data);
-            clientService.save(client);
-        }
+            User user = UserMapper.toEntity(data);
+            user.getRoles().add(new UserRole("CLIENT"));
+            userService.save(user);
     }
 
     public void update(RegistrationDataDto data) {
-        if (data.getRole().equals("broker")) {
-            Broker broker = BrokerMapper.toEntity(data);
-            brokerService.save(broker);
-        } else {
-            Client client = ClientMapper.toEntity(data);
-            clientService.save(client);
-        }
+            User user = UserMapper.toEntity(data);
+            userService.save(user);
+
     }
 
 
@@ -49,15 +37,16 @@ public class RegistrationService {
         if (roles.contains("broker")){
             Broker broker = brokerService.findByUsername(username);
             return BrokerMapper.toDto(broker);
-        } else {Client client = clientService.findByUsername(username);
-            return ClientMapper.toDto(client);}
+        } else {User client = clientService.findByUsername(username);
+            return UserMapper.toDto(client);}
     }*/
 
     public RegistrationDataDto getRegistrationDataDto(String username) {
-        if (brokerService.findByUsername(username) != null) {
-            return BrokerMapper.toDto(brokerService.findByUsername(username));
-        } else {
-            return ClientMapper.toDto(clientService.findByUsername(username));
-        }
+
+        User user = userService.findByUsername(username);
+        System.out.println("test");
+        RegistrationDataDto dto = UserMapper.toDto(user);
+        System.out.println("test");
+        return dto;
     }
 }

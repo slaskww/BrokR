@@ -4,10 +4,7 @@ import com.apl.brokr.dto.RequestDataDto;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.services.ClientRequestService;
-import com.apl.brokr.services.ClientService;
-import com.apl.brokr.services.GeneralInsuranceCatService;
-import com.apl.brokr.services.InsuranceSubcategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.apl.brokr.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +20,18 @@ import java.util.Set;
 public class ClientController {
 
     private ClientRequestService clientRequestService;
-    private ClientService clientService;
+    private UserService userService;
 
 
-    public ClientController(ClientRequestService clientRequestService, ClientService clientService) {
+    public ClientController(ClientRequestService clientRequestService, UserService userService) {
         this.clientRequestService = clientRequestService;
-        this.clientService = clientService;
+        this.userService = userService;
     }
 
     @GetMapping("/request/add")
-    public String displayRequestForm(Model model){
+    public String displayRequestForm(Model model) {
 
-       Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
+        Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
         model.addAttribute("data", new RequestDataDto());
         model.addAttribute("mapa", map);
         return "request-form";
@@ -42,11 +39,11 @@ public class ClientController {
 
 
     @PostMapping("/request/add")
-    public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal){
+    public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal) {
 
         RequestDataDto filledDto = dataDto;
-        System.out.println("Principal: " +  principal.getName());
-        filledDto.setClient(clientService.findByUsername(principal.getName()));
+        System.out.println("Principal: " + principal.getName());
+        filledDto.setClient(userService.findByUsername(principal.getName()));
         System.out.println(filledDto.toString());
         clientRequestService.save(dataDto);
 
@@ -56,7 +53,7 @@ public class ClientController {
     }
 
     @GetMapping("/request/all")
-    public String displayRequestList(Model model, Principal principal){
+    public String displayRequestList(Model model, Principal principal) {
 
         List<RequestDataDto> requests = clientRequestService.getAllByUsername(principal.getName());
         model.addAttribute("requests", requests);
@@ -64,7 +61,7 @@ public class ClientController {
     }
 
     @GetMapping("/request/{id}")
-    public String displayChosenRequest(@PathVariable Long id, Model model){
+    public String displayChosenRequest(@PathVariable Long id, Model model) {
 
         RequestDataDto data = clientRequestService.getOneById(id);
         model.addAttribute("request", data);
