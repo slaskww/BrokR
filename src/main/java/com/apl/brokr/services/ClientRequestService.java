@@ -52,6 +52,10 @@ public class ClientRequestService {
         return ClientRequestMapper.toDtoList(requests);
     }
 
+    public List<RequestDataDto> getAll(){
+        List<ClientRequest> requests = clientRequestRepository.findAll();
+        return ClientRequestMapper.toDtoList(requests);
+    }
 
     public RequestDataDto getOneById(Long id) {
         ClientRequest request = clientRequestRepository.findById(id).get();

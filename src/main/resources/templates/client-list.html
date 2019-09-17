@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org/extras/dialect"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista klientów</title>
+    <style>
+        .pagination {
+            display: inline-block;
+        }
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 5px 5px;
+            text-decoration: none;
+        }
+        .pagination a.active {
+            background-color: gray;
+            color: white;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<table border = "2">
+    <thead>
+    <tr>Lista klientów</tr>
+    <tr>
+        <th>#</th>
+        <th>Firma</th>
+        <th>Nazwisko</th>
+        <th>Telefon</th>
+        <th>Rejestracja</th>
+        <th>Czy aktywny</th>
+        <th>Wnioski</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client, iStat : ${clients.content}">
+        <td th:text="${iStat.count}"></td>
+        <td th:text="${client.companyName}"></td>
+        <td th:text="${client.firstName.concat(' ' + client.lastName)}"></td>
+        <td th:text="${client.phoneNumber}"></td>
+        <td th:text="${client.createdOn.toLocalDate()}"></td>
+        <td th:text="${client.enabled} ? 'tak' : 'nie'"></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${clients.totalPages > 0}" class = "pagination" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/broker/clients/all(size=${clients.getSize()}, page=${pageNumber})}"
+       th:text="${pageNumber + 1}"
+       th:class="${pageNumber == clients.number} ? active"></a>
+
+</div>
+</body>
+</html>

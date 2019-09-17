@@ -9,8 +9,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 @Component
 public class SetupDataCreator implements ApplicationRunner {
@@ -27,6 +30,7 @@ public class SetupDataCreator implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         createMainUsers();
+        createTestUsers();
     }
 
 
@@ -85,6 +89,18 @@ public class SetupDataCreator implements ApplicationRunner {
         createUserIfNotExists(
                 "admin", "pass", "admin@admin.eu", "617774614", adminAddress, "IT Corp",
                 "Mat", "Trent", "krs_8834", "nip_8834", "regon_8834", "pkd_8834", "ADMIN");
+    }
+
+    private void createTestUsers(){
+        LongStream.rangeClosed(1, 50).forEach(number -> createTestUser(number));
+    }
+
+    private void createTestUser(Long id){
+        Address address = new Address("Wroclaw", "Testowa " + id, "51-112", "Wroclaw", "Wroclaw", "Dolnoslaskie", "Polska");
+
+        createUserIfNotExists(
+                "client" + id, "pass" + id, "client"  + id +"@client.eu", "617774" + id, address, "Top " + id + " Corp",
+                "Anna", "Kowalska" + id, "krs_88" + id, "nip_88" + id, "regon_88" + id, "pkd_88" + id, "CLIENT");
     }
 }
 
