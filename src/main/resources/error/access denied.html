@@ -2,13 +2,13 @@
 <layout:html
         xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
         layout:decorate="~{fragments/layout}">
-<head>
-    <title>Access Denied</title>
-</head>
-<body>
-<div layout:fragment="content" th:remove="tag">
-    <h1>Access denied</h1>
-    <p><a href="/" th:href="@{/}">Back to home page</a></p>
-</div>
-</body>
+    <head>
+        <title>Access Denied</title>
+    </head>
+    <body>
+    <div layout:fragment="content" th:remove="tag">
+        <h1>Access denied</h1>
+        <p><a href="/" th:href="@{/}">Back to home page</a></p>
+    </div>
+    </body>
 </layout:html>

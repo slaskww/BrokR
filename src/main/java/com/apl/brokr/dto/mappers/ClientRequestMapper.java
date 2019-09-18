@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 public class ClientRequestMapper {
 
 
-
-    public static ClientRequest toEntity(RequestDataDto dataDto){
+    public static ClientRequest toEntity(RequestDataDto dataDto) {
 
         ClientRequest clientRequest = new ClientRequest();
         clientRequest.setSubcategories(dataDto.getSubcategories());
@@ -22,7 +21,7 @@ public class ClientRequestMapper {
     }
 
 
-    public static RequestDataDto toDto(ClientRequest clientRequest){
+    public static RequestDataDto toDto(ClientRequest clientRequest) {
 
         RequestDataDto dataDto = new RequestDataDto();
         dataDto.setSubcategories(clientRequest.getSubcategories());
@@ -34,8 +33,8 @@ public class ClientRequestMapper {
         return dataDto;
     }
 
-    public static List<RequestDataDto> toDtoList(List<ClientRequest> requests){
+    public static List<RequestDataDto> toDtoList(List<ClientRequest> requests) {
 
-       return requests.stream().map(clientRequest -> toDto(clientRequest)).collect(Collectors.toList());
+        return requests.stream().map(clientRequest -> toDto(clientRequest)).collect(Collectors.toList());
     }
 }

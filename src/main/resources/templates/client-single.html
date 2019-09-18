@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org/extras/dialect"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Dane szczegółowe klienta</title>
+</head>
+<body>
+<table border="2">
+    <thead>
+    <tr>Dane osobowe</tr>
+    <tr>
+        <td>Nazwa</td>
+        <td>Imie i nazwisko</td>
+        <td>Ulica</td>
+        <td>Kod poczt.</td>
+        <td>Miasto</td>
+        <td>Województwo</td>
+        <td>W bazie od</td>
+        <td>Status klienta</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${client.getCompanyName()}"></td>
+        <td th:text="${client.firstName.concat(' ' + client.lastName)}"></td>
+        <td th:text="${client.address.street}"></td>
+        <td th:text="${client.address.postalCode}"></td>
+        <td th:text="${client.address.city}"></td>
+        <td th:text="${client.address.province}"></td>
+        <td th:text="${client.createdOn.toLocalDate()}"></td>
+        <td th:text="${client.enabled} ? 'aktywny' : 'nieaktywny' "></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<table border="2">
+    <thead>
+    <tr>Dane rejestrowe</tr>
+    <tr>
+        <th>Numer NIP</th>
+        <th>Numer REGON</th>
+        <th>Numer KRS</th>
+        <th>NUMER PKD</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${client.nipNumber}"></td>
+        <td th:text="${client.regonNumber}"></td>
+        <td th:text="${client.krsNumber}"></td>
+        <td th:text="${client.pkdNumber}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table border="2">
+    <thead>
+    <tr>Dane kontaktowe</tr>
+    <tr>
+        <th>Telefon</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${client.phoneNumber}"></td>
+        <td th:text="${client.email}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table border="2">
+    <thead>
+    <tr>Złożone wnioski</tr>
+    <tr>
+        <th>Numer wniosku</th>
+        <th>Data złożenia</th>
+        <th>Typ</th>
+        <th>status</th>
+        <th>Szczegóły wniosku</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each=" elem : ${client.requests}">
+        <td th:text="${elem.id}"></td>
+        <td th:text="${elem.requestDate.toLocalDate()}"></td>
+        <td th:text="${elem.generalInsuranceCategory.getName()}"></td>
+        <td></td>
+        <td><a th:href="@{'/broker/request/' + ${elem.id}}">wniosek</a></td>
+    </tr>
+    </tbody>
+</table>
+<p><a th:href="@{/main}">wróć do menu głównego</a></p>
+</body>
+</html>

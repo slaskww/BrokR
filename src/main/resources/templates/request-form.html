@@ -6,24 +6,24 @@
     <title>Title</title>
 </head>
 <body>
-<p>In request-form</p>
+<p>Formularz wniosku</p>
 
 <table>
-<!--    <tr>
-        <td>Wybierz kategorię ubezpieczenia:</td>
-        <td>
-            <select>
-                <option value=""> &#45;&#45;</option>
-                <option th:each="entry : ${mapa.values()}"
-                        th:value="${entry}"
-                        th:utext="${entry}"/>
-            </select>
-        </td>
-    </tr>
+    <!--    <tr>
+            <td>Wybierz kategorię ubezpieczenia:</td>
+            <td>
+                <select>
+                    <option value=""> &#45;&#45;</option>
+                    <option th:each="entry : ${mapa.values()}"
+                            th:value="${entry}"
+                            th:utext="${entry}"/>
+                </select>
+            </td>
+        </tr>
 
-    <tr>
-        <td><input name="submit" type="submit" value="submit"/></td>
-    </tr>-->
+        <tr>
+            <td><input name="submit" type="submit" value="submit"/></td>
+        </tr>-->
 
     <form th:action="@{/client/request/add}" method="post" th:object="${data}">
         <!--     <input type="hidden" th:field="*{id}"/>
@@ -35,10 +35,11 @@
             <label>Rodzaje ubezpieczeń:</label>
             <ul>
                 <li th:each="element : ${mapa}">
-                    <p th:text="${element.key.getName()}"></p><br />
+                    <p th:text="${element.key.getName()}"></p><br/>
                     <table>
                         <tr th:each="elem : ${element.value}">
-                            <input type="checkbox" th:text="${elem.getName()}" th:value="${{elem}}" th:field="*{subcategories}" /><br />
+                            <input type="checkbox" th:text="${elem.getName()}" th:value="${{elem}}"
+                                   th:field="*{subcategories}"/><br/>
                         </tr>
                     </table>
                 </li>
@@ -48,8 +49,7 @@
             <button type="submit" value="Save" class="button">Save</button>
         </div>
     </form>
-
 </table>
-
+<p><a th:href="@{/main}">wróć do menu głównego</a></p>
 </body>
 </html>

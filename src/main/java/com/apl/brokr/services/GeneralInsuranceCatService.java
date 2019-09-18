@@ -19,7 +19,7 @@ public class GeneralInsuranceCatService {
         this.generalInsCatRepo = generalInsCatRepo;
     }
 
-    public List<GeneralInsuranceCategory> findAll(){
-      return generalInsCatRepo.findAll();
+    public List<GeneralInsuranceCategory> findAll() {
+        return generalInsCatRepo.findAll();
     }
 }

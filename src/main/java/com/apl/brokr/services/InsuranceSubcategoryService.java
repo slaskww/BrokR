@@ -19,10 +19,10 @@ public class InsuranceSubcategoryService {
         this.insSubcatRepo = insSubcatRepo;
     }
 
-    public List<InsuranceSubcategory> findAll(){
+    public List<InsuranceSubcategory> findAll() {
 
         List<InsuranceSubcategory> list = insSubcatRepo.findAll();
-       // list.stream().forEach(insuranceSubcategory -> insuranceSubcategory.getGeneralCat().getName());
-       return list;
+        // list.stream().forEach(insuranceSubcategory -> insuranceSubcategory.getGeneralCat().getName());
+        return list;
     }
 }

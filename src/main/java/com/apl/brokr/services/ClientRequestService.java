@@ -2,7 +2,6 @@ package com.apl.brokr.services;
 
 import com.apl.brokr.dto.RequestDataDto;
 import com.apl.brokr.dto.mappers.ClientRequestMapper;
-import com.apl.brokr.model.entities.Client;
 import com.apl.brokr.model.entities.ClientRequest;
 import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
@@ -23,14 +22,14 @@ public class ClientRequestService {
     private ClientRequestRepository clientRequestRepository;
     private GeneralInsuranceCatService generalInsuranceCatService;
     private InsuranceSubcategoryService insuranceSubcategoryService;
-    private ClientService clientService;
+    private UserService userService;
 
     @Autowired
-    public ClientRequestService(ClientRequestRepository clientRequestRepository, GeneralInsuranceCatService generalInsuranceCatService, InsuranceSubcategoryService insuranceSubcategoryService, ClientService clientService) {
+    public ClientRequestService(ClientRequestRepository clientRequestRepository, GeneralInsuranceCatService generalInsuranceCatService, InsuranceSubcategoryService insuranceSubcategoryService, UserService userService) {
         this.clientRequestRepository = clientRequestRepository;
         this.generalInsuranceCatService = generalInsuranceCatService;
         this.insuranceSubcategoryService = insuranceSubcategoryService;
-        this.clientService = clientService;
+        this.userService = userService;
     }
 
 
@@ -42,20 +41,24 @@ public class ClientRequestService {
 
     }
 
-    public void save(RequestDataDto requestDataDto){
+    public void save(RequestDataDto requestDataDto) {
         ClientRequest clientRequest = ClientRequestMapper.toEntity(requestDataDto);
         clientRequestRepository.save(clientRequest);
     }
 
 
-    public List<RequestDataDto> getAllByUsername(String username){
-        List<ClientRequest> requests =  clientRequestRepository.findAllByClient_Username(username);
-      return ClientRequestMapper.toDtoList(requests);
+    public List<RequestDataDto> getAllByUsername(String username) {
+        List<ClientRequest> requests = clientRequestRepository.findAllByClient_Username(username);
+        return ClientRequestMapper.toDtoList(requests);
     }
 
+    public List<RequestDataDto> getAll(){
+        List<ClientRequest> requests = clientRequestRepository.findAll();
+        return ClientRequestMapper.toDtoList(requests);
+    }
 
-    public RequestDataDto getOneById(Long id){
-       ClientRequest request = clientRequestRepository.findById(id).get();
-       return ClientRequestMapper.toDto(request);
+    public RequestDataDto getOneById(Long id) {
+        ClientRequest request = clientRequestRepository.findById(id).get();
+        return ClientRequestMapper.toDto(request);
     }
 }
