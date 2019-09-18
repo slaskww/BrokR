@@ -90,4 +90,12 @@ public class BrokerController {
         return "client-list";
     }
 
+    @GetMapping("/clients/{id}")
+    public String displayChosenClient(@PathVariable("id") Long id, Model model){
+
+      User client = userService.findById(id);
+      model.addAttribute("client", client);
+        return "client-single";
+    }
+
 }

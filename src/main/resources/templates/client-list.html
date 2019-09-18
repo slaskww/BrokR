@@ -34,8 +34,8 @@
         <th>Nazwisko</th>
         <th>Telefon</th>
         <th>Rejestracja</th>
-        <th>Czy aktywny</th>
-        <th>Wnioski</th>
+        <th>Status klienta</th>
+        <th>Szegóły</th>
     </tr>
     </thead>
     <tbody>
@@ -45,7 +45,8 @@
         <td th:text="${client.firstName.concat(' ' + client.lastName)}"></td>
         <td th:text="${client.phoneNumber}"></td>
         <td th:text="${client.createdOn.toLocalDate()}"></td>
-        <td th:text="${client.enabled} ? 'tak' : 'nie'"></td>
+        <td th:text="${client.enabled} ? 'aktywny' : 'nieaktywny'"></td>
+        <td><a th:href="@{'/broker/clients/' + ${client.id}}">klient</a></td>
         <td></td>
     </tr>
     </tbody>
@@ -54,7 +55,7 @@
     <a th:href="@{/broker/clients/all(size=${clients.getSize()}, page=${pageNumber})}"
        th:text="${pageNumber + 1}"
        th:class="${pageNumber == clients.number} ? active"></a>
-
 </div>
+<p><a th:href="@{/main}">wróć do menu głównego</a></p>
 </body>
 </html>
