@@ -13,10 +13,12 @@
 
 
     <form method="post" th:object="${data}" th:action="@{''}">
-            <select th:field="*{generalInsuranceCategory}" name="category" onchange="this.form.submit()">
+            <select th:field="*{generalInsuranceCategory}" name="category" id="category" onchange="this.form.submit()">
                 <option th:each="elem : ${mapa}" th:value="${elem.key.id}" th:text="${elem.key.getName()}">
                 </option>
             </select>
+
+
             <div th:each="element : ${mapa}">
                     <span th:each="el : ${element.value}" th:if="${element.key.name} == 'Ubezpieczenia majątkowe - ubezpieczenia mienia'">
                         <input type="checkbox" th:text="${el.getName()}" th:value="${{el}}"
@@ -25,7 +27,7 @@
             </div>
 <!--             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
         <sec:csrfInput/>
-            <button type="submit" value="Save" class="button" name="save">Save</button>
+            <button type="submit" value="save" class="button" name="save">Save</button>
     </form>
 </body>
 </html>

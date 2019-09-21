@@ -38,7 +38,7 @@ public class ClientController {
     }
 
 
-    @PostMapping(params = ("save"))
+    @PostMapping(value = "/request/add", params = ("save"))
     public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal) {
 
         RequestDataDto filledDto = dataDto;
@@ -48,12 +48,12 @@ public class ClientController {
         return "main-menu";
     }
 
-    @PostMapping(params = ("category"))
-    public String proceedRequestForm(GeneralInsuranceCategory gen, Principal principal) {
+    @PostMapping(value = "/request/add", params = ("generalInsuranceCategory"))
+    public String proceedRequestForm(GeneralInsuranceCategory generalInsuranceCategory) {
 
+        System.out.println("category");
         return "request-form";
     }
-
     @GetMapping("/request/all")
     public String displayRequestList(Model model, Principal principal) {
 
