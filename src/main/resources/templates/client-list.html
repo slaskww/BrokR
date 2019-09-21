@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-
+<p><a th:href="@{/main}">wróć do menu głównego</a></p>
 <table border = "2">
     <thead>
     <tr>Lista klientów</tr>
@@ -56,6 +56,5 @@
        th:text="${pageNumber + 1}"
        th:class="${pageNumber == clients.number} ? active"></a>
 </div>
-<p><a th:href="@{/main}">wróć do menu głównego</a></p>
 </body>
 </html>
