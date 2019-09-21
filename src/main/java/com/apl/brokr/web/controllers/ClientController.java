@@ -38,13 +38,20 @@ public class ClientController {
     }
 
 
-    @PostMapping("/request/add")
+    @PostMapping(params = ("save"))
     public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal) {
 
         RequestDataDto filledDto = dataDto;
         filledDto.setClient(userService.findByUsername(principal.getName()));
         clientRequestService.save(dataDto);
+        System.out.println(dataDto.toString());
         return "main-menu";
+    }
+
+    @PostMapping(params = ("category"))
+    public String proceedRequestForm(GeneralInsuranceCategory gen, Principal principal) {
+
+        return "request-form";
     }
 
     @GetMapping("/request/all")
