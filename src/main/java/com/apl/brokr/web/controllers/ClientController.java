@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,29 +32,33 @@ public class ClientController {
     @GetMapping("/request/add")
     public String displayRequestForm(Model model) {
 
-        Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
+        List<GeneralInsuranceCategory> generalCat = clientRequestService.getAllGenralInsCat();
+        List<InsuranceSubcategory> subcategories = new ArrayList<>();
+
         model.addAttribute("data", new RequestDataDto());
-        model.addAttribute("mapa", map);
+        model.addAttribute("generalCat", generalCat);
+        model.addAttribute("subcategories", subcategories);
         return "request-form";
     }
 
 
-    @PostMapping(params = ("save"))
+    @PostMapping(value = "/request/add", params = ("save"))
     public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal) {
-
-        RequestDataDto filledDto = dataDto;
-        filledDto.setClient(userService.findByUsername(principal.getName()));
+        dataDto.setClient(userService.findByUsername(principal.getName()));
         clientRequestService.save(dataDto);
         System.out.println(dataDto.toString());
         return "main-menu";
     }
 
-    @PostMapping(params = ("category"))
-    public String proceedRequestForm(GeneralInsuranceCategory gen, Principal principal) {
-
+    @PostMapping(value = "/request/add", params = ("generalInsuranceCategory"))
+    public String displayRequestFormWithChosenGeneralCat(GeneralInsuranceCategory generalInsuranceCategory, Model model) {
+        RequestDataDto data = new RequestDataDto();
+        data.setGeneralInsuranceCategory(generalInsuranceCategory);
+        model.addAttribute("data", data);
+        model.addAttribute("generalCat", clientRequestService.getAllGenralInsCat());
+        model.addAttribute("subcategories", clientRequestService.getAllInsSubcstByGeneralCategName(generalInsuranceCategory.getName()));
         return "request-form";
     }
-
     @GetMapping("/request/all")
     public String displayRequestList(Model model, Principal principal) {
 
