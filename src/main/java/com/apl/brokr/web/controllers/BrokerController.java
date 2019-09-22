@@ -37,7 +37,7 @@ public class BrokerController {
     @GetMapping("/request/add")
     public String displayRequestForm(Model model) {
 
-        Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
+        Map<GeneralInsuranceCategory, List<InsuranceSubcategory>> map = clientRequestService.getCompleteMapOfInsuranceCategories();
         model.addAttribute("data", new RequestDataDto());
         model.addAttribute("mapa", map);
         return "request-form";

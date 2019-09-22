@@ -11,19 +11,17 @@
 <p><a th:href="@{/main}">wróć do menu głównego</a></p>
 <p>Formularz wniosku</p>
 
-
     <form method="post" th:object="${data}" th:action="@{''}">
-            <select th:field="*{generalInsuranceCategory}" name="category" id="category" onchange="this.form.submit()">
-                <option th:each="elem : ${mapa}" th:value="${elem.key.id}" th:text="${elem.key.getName()}">
+
+            <select th:field="*{generalInsuranceCategory}"  onchange="this.form.submit()">
+                <option th:each="elem : ${generalCat}" th:value="${elem.id}" th:text="${elem.name}">
                 </option>
             </select>
 
 
-            <div th:each="element : ${mapa}">
-                    <span th:each="el : ${element.value}" th:if="${element.key.name} == 'Ubezpieczenia majątkowe - ubezpieczenia mienia'">
-                        <input type="checkbox" th:text="${el.getName()}" th:value="${{el}}"
+            <div th:each="element : ${subcategories}">
+                        <input type="checkbox" th:text="${element.name}" th:value="${{element.id}}"
                                th:field="*{subcategories}"/><br/>
-                    </span>
             </div>
 <!--             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
         <sec:csrfInput/>

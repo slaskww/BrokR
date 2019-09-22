@@ -33,12 +33,20 @@ public class ClientRequestService {
     }
 
 
-    public Map<GeneralInsuranceCategory, Set<InsuranceSubcategory>> getCompleteMapOfInsuranceCategories() {
+    public Map<GeneralInsuranceCategory, List<InsuranceSubcategory>> getCompleteMapOfInsuranceCategories() {
         List<InsuranceSubcategory> insSubcats = insuranceSubcategoryService.findAll();
         return insSubcats
                 .stream()
-                .collect(Collectors.groupingBy(o -> o.getGeneralCat(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory, Collectors.toSet())));
+                .collect(Collectors.groupingBy(insuranceSubcategory1 -> insuranceSubcategory1.getGeneralCat(), Collectors.mapping(insuranceSubcategory -> insuranceSubcategory, Collectors.toList())));
 
+    }
+
+    public List<GeneralInsuranceCategory> getAllGenralInsCat(){
+        return generalInsuranceCatService.findAll();
+    }
+
+    public List<InsuranceSubcategory> getAllInsSubcstByGeneralCategName(String generalCat){
+        return insuranceSubcategoryService.getAllInsSubcstByGeneralCategName(generalCat);
     }
 
     public void save(RequestDataDto requestDataDto) {
