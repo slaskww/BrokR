@@ -42,16 +42,15 @@ public class ClientController {
     }
 
 
-    @PostMapping(value = "/request/add", params = ("save"))
+    @PostMapping(value = "/request/add", params = {"save", "generalInsuranceCategory"} )
     public String proceedRequestForm(@ModelAttribute("data") RequestDataDto dataDto, Principal principal) {
         dataDto.setClient(userService.findByUsername(principal.getName()));
         clientRequestService.save(dataDto);
-        System.out.println(dataDto.toString());
         return "main-menu";
     }
 
     @PostMapping(value = "/request/add", params = ("generalInsuranceCategory"))
-    public String displayRequestFormWithChosenGeneralCat(GeneralInsuranceCategory generalInsuranceCategory, Model model) {
+    public String displayRequestFormWithChosenGeneralCat(GeneralInsuranceCategory generalInsuranceCategory ,Model model) {
         RequestDataDto data = new RequestDataDto();
         data.setGeneralInsuranceCategory(generalInsuranceCategory);
         model.addAttribute("data", data);
