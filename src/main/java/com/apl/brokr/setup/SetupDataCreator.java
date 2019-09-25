@@ -51,7 +51,7 @@ public class SetupDataCreator implements ApplicationRunner {
 
         userRepository.findUserByUsername(username)
                 .ifPresentOrElse(
-                        user -> System.out.println("User " + user.getUsername() + " exists"),
+                        user -> System.out.print(""),
                         () -> {
                             User user = new User();
                             user.setUsername(username);
@@ -68,7 +68,6 @@ public class SetupDataCreator implements ApplicationRunner {
                             user.setPkdNumber(pkdNumber);
                             user.getRoles().addAll(Arrays.stream(roles).map(s -> "ROLE_".concat(s)).map(s -> new UserRole(s)).collect(Collectors.toSet()));
                             userRepository.save(user);
-                            System.out.println("User " + username + " saved!");
                         });
     }
 
@@ -92,7 +91,7 @@ public class SetupDataCreator implements ApplicationRunner {
     }
 
     private void createTestUsers(){
-        LongStream.rangeClosed(1, 50).forEach(number -> createTestUser(number));
+        LongStream.rangeClosed(1, 20).forEach(number -> createTestUser(number));
     }
 
     private void createTestUser(Long id){

@@ -17,7 +17,10 @@
         <div class="col-md-6 col-sm-4 col-xs-12 col-md-offset-3 col-sm-offset-2">
 
             <div class="register-form">
-                <!--poczatek-->
+
+
+                <p class="register-form"><a th:href="@{/main}">wróć do menu głównego</a></p>
+
                 <div class="register-form">
 
                     <form method="post" th:action = "@{/register}" th:object="${data}" >
@@ -212,6 +215,7 @@
             </div>
         </div>
     </div>
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>

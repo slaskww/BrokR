@@ -29,7 +29,7 @@
     <a th:href="@{/broker/clients/add}">dodaj nowego klienta</a><br/>
     <a th:href="@{/broker/clients/all}">twoi klienci</a><br/>
 </div>
-<div sec:authorize="hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')">
+<div sec:authorize="hasRole('ROLE_CLIENT')">
     <a th:href="@{/client/request/add}">dodaj formularz zapytania</a><br/>
     <a th:href="@{/client/request/all}">przeglądaj twoje formularze</a><br/>
     <a th:href="@{/client/poa/add}">dodaj pełnomocnictwo</a><br/>

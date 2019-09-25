@@ -1,5 +1,6 @@
 package com.apl.brokr.services;
 
+import com.apl.brokr.model.entities.GeneralInsuranceCategory;
 import com.apl.brokr.model.entities.InsuranceSubcategory;
 import com.apl.brokr.model.repositories.InsuranceSubcategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,9 @@ public class InsuranceSubcategoryService {
         List<InsuranceSubcategory> list = insSubcatRepo.findAll();
         // list.stream().forEach(insuranceSubcategory -> insuranceSubcategory.getGeneralCat().getName());
         return list;
+    }
+
+    public List<InsuranceSubcategory> getAllInsSubcstByGeneralCategName(String generalCat){
+        return insSubcatRepo.findAllByGeneralCat_Name(generalCat);
     }
 }
