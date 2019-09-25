@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org/extras/dialect"
+<html lang="pl" xmlns="http://www.thymeleaf.org/extras/dialect"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Lista klientów</title>
+    <title>Lista klientów
+
     <style>
         .pagination {
             display: inline-block;
@@ -22,7 +23,7 @@
             border-radius: 2px;
         }
     </style>
-</head>
+</title>
 <body>
 <p><a th:href="@{/main}">wróć do menu głównego</a></p>
 <table border = "2">
@@ -35,7 +36,7 @@
         <th>Telefon</th>
         <th>Rejestracja</th>
         <th>Status klienta</th>
-        <th>Szegóły</th>
+        <th>Szczegóły</th>
     </tr>
     </thead>
     <tbody>

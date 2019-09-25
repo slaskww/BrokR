@@ -42,6 +42,7 @@ public class SecurityLayerConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
        http.authorizeRequests()
                .antMatchers("/register", "/register/**").permitAll()
+               .antMatchers ("/css/**", "/images/**").permitAll ()
                .antMatchers("/login", "/logout").authenticated()
                .antMatchers("/client", "/client/**").hasAnyRole("CLIENT", "BROKER", "ADMIN")
                .antMatchers("/broker", "/broker/**").hasAnyRole("BROKER", "ADMIN")
